@@ -1,0 +1,3 @@
+	id	name	model_id:id	group_id:id	perm_read	perm_write	perm_create	perm_unlink
+1	acl_livro	biblioteca.livro_default	model_biblioteca_livro		1	0	0	0
+2	acl_livro_librarian	biblioteca.livro_librarian	model_biblioteca_livro	group_librarian	1	1	1	1
