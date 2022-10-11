@@ -22,7 +22,38 @@ class BibliotecaLivro(models.Model):
     'Reader Avarege Rating', 
     digits = (14, 4),
   )
+  cost_price = fields.Float(
+    'Livro Custo', digits = 'Livro Preco'
+  )
+  currency_id = fields.Many2one(
+    'res.currency', string='Currency')
+  
+  retail_price = fields.Monetary(
+    'Retail Price',
+#     optional: currency_field = 'currency_id',
+  )
   author_ids = fields.Many2many(
     'res.partner',
     string = 'Authors'
+  )
+  
+  publisher_id = fields.Many2one(
+    'res.partner', string = 'Publisher',
+#     Optional:
+    ondelete = 'set null',
+    context= {},
+    domain = [],
+  )
+  
+class ResPartner(models.Model):
+  _inherit = 'res.partner'
+  published_book_ids = fields.One2many(
+    'biblioteca.livro', 'publisher_id',
+    string = 'Published Books')
+  
+  authored_books_ids = fields.Many2many(
+    'biblioteca.livro',
+    string = 'Authored Books',
+#     relation = 'biblioteca_book_res_partner_rel'
+#     optional
   )
