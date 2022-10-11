@@ -10,7 +10,8 @@
   'data': [
     'security/groups.xml',
     'security/ir.model.access.csv',
-    'views/biblioteca_livro.xml'
+    'views/biblioteca_livro.xml',
+    'views/biblioteca.livro.categoria.xml'
   ],
 #   'demo': ['demo.xml'],
 }
