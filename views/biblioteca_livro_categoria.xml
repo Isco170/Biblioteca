@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record id="biblioteca_livro_categoria_action" model="ir.actions.act_window">
+    <field name="name">Livro Categorias</field>
+    <field name="res_model">biblioteca.livro.categoria</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  
+  <menuitem name="Livro Categorias" id="biblioteca_livro_categoria_menu" parent="biblioteca_base_menu" action="biblioteca_livro_categoria_action" />
+  
+<!-- Form View   -->
+  <record id="biblioteca_livro_categoria_view_form" model="ir.ui.view">
+    <field name="name">Biblioteca Categoria Form</field>
+    <field name="model">biblioteca.livro.categoria</field>
+    <field name="arch">
+      <form>
+        <group>
+          <group>
+            <field name="name" />
+          </group>
+          <group>
+            <field name="parent_id" />
+          </group>
+        </group>
+        <group>
+          <field name="child_ids" />
+        </group>
+      </form>
+    </field>
+  </record>
+</odoo>
