@@ -12,7 +12,7 @@
   <record id="biblioteca_livro_categoria_view_form" model="ir.ui.view">
     <field name="name">Biblioteca Categoria Form</field>
     <field name="model">biblioteca.livro.categoria</field>
-    <field name="arch">
+    <field name="arch" type="xml">
       <form>
         <group>
           <group>
@@ -26,6 +26,17 @@
           <field name="child_ids" />
         </group>
       </form>
+    </field>
+  </record>
+  
+<!--  Tree(List) View  -->
+  <record id="biblioteca_livro_categoria_view_tree" model="ir.ui.view">
+    <field name="name">Biblioteca Livro Lista</field>
+    <field name="model">biblioteca.livro.categoria</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+      </tree>
     </field>
   </record>
 </odoo>
