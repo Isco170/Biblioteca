@@ -45,6 +45,8 @@ class BibliotecaLivro(models.Model):
     domain = [],
   )
   
+  category_id = fields.Many2one('biblioteca.livro.categoria')
+  
 class ResPartner(models.Model):
   _inherit = 'res.partner'
   published_book_ids = fields.One2many(
