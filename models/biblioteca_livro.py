@@ -55,6 +55,11 @@ class BibliotecaLivro(models.Model):
     domain = [],
   )
   
+  publisher_city = fields.Char(
+    'Publisher City',
+    related = 'publisher_id.city',
+    readonly = True)
+  
   category_id = fields.Many2one('biblioteca.livro.categoria')
   
   _sql_constraints = [
