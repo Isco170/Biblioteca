@@ -62,6 +62,11 @@ class BibliotecaLivro(models.Model):
   
   category_id = fields.Many2one('biblioteca.livro.categoria')
   
+  ref_doc_id = fields.Reference(
+    selection = '_referencable_models',
+    string = 'Reference Document'
+  )
+  
   _sql_constraints = [
     ('name_uniq', 'UNIQUE (name)','O titulo do livro deve ser unico.'),
     ('positive_page', 'CHECK(pages>0)','Nr de paginas deve ser positivo')
@@ -103,6 +108,12 @@ class BibliotecaLivro(models.Model):
         book.age_days = delta.days
       else:
         book.age_days = 0
+  
+  @api.model
+  def _referencable_models(self):
+    models = self.env['ir.model'].search([
+      ('field_id.name', '=', 'message_ids')])
+    return [(x.model, x.name) for x in models]
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
