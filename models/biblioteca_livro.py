@@ -168,7 +168,7 @@ class BibliotecaLivro(models.Model):
   def log_all_library_members(self):
 #     This is an empty recordset of model biblioteca.membro
     biblioteca_membro_model = self.env['biblioteca.membro']
-    all_members = library_member_model.search([])
+    all_members = biblioteca_membro_model.search([])
     print("ALL MEMBERS: ", all_members)
     return True
   
