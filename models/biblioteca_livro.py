@@ -1,3 +1,5 @@
+from odoo.exeception import UserError
+from odoo.tools.translate import _
 from datetime import timedelta
 from odoo import models, fields, api
 
@@ -187,10 +189,12 @@ class ResPartner(models.Model):
       
 class LibraryMember(models.Model):
   _name = 'biblioteca.membro'
+  _description = 'Descricao'
   _inherits = {'res.partner': 'partner_id'}
   partner_id = fields.Many2one(
     'res.partner',
-    ondelete = 'cascade'
+    ondelete = 'cascade',
+    required=True
   )
   
   date_start = fields.Date('Member Since')
