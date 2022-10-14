@@ -1,8 +1,19 @@
 from datetime import timedelta
 from odoo import models, fields, api
 
+class BaseArchive(models.AbstractModel):
+  _name = 'base.archive'
+  _description = "Abstract Archive"
+  
+  active = fields.Boolean(default=True)
+  
+  def do_archive(self):
+    for record in self:
+      record.active = not record.active
+      
 class BibliotecaLivro(models.Model):
   _name = 'biblioteca.livro'
+  _inherit = ['base.archive']
   _description = 'Biblioteca Livro'
   _order = 'date_release desc, name'
   _rec_name = 'abreviatura'
@@ -66,6 +77,10 @@ class BibliotecaLivro(models.Model):
     selection = '_referencable_models',
     string = 'Reference Document'
   )
+  
+  state = fields.Selection([
+    ('draft', 'Unavailable'),
+  ])
   
   _sql_constraints = [
     ('name_uniq', 'UNIQUE (name)','O titulo do livro deve ser unico.'),
@@ -149,8 +164,4 @@ class LibraryMember(models.Model):
   date_end = fields.Date('Termination Date')
   member_number = fields.Char()
   date_of_birth = fields.Date('Date of birth')
-  
-class BaseArchive(models.AbstractModel):
-  _name = 'base.archive',
-  active = fields.Boolean(default=True)
   
