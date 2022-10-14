@@ -152,6 +152,16 @@ class BibliotecaLivro(models.Model):
       else:
         continue
   
+#   Method to change the book state by calling the change_state method
+  def make_available(self):
+    self.change_state('available')
+  
+  def make_borrowed(self):
+    self.change_state('borrowed')
+    
+  def make_lost(self):
+    self.change_state('lost')
+  
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
