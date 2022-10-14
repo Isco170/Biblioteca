@@ -144,3 +144,8 @@ class LibraryMember(models.Model):
     'res.partner',
     ondelete = 'cascade'
   )
+  
+  date_start = fields.Date('Member Since')
+  date_end = fields.Date('Termination Date')
+  member_number = fields.Char()
+  date_of_birth = fields.Date('Date of birth')
