@@ -1,7 +1,7 @@
-from odoo.exeception import UserError
+from odoo import models, fields, api
+from odoo.exceptions import UserError
 from odoo.tools.translate import _
 from datetime import timedelta
-from odoo import models, fields, api
 
 class BaseArchive(models.AbstractModel):
   _name = 'base.archive'
@@ -152,7 +152,8 @@ class BibliotecaLivro(models.Model):
       if book.is_allowed_transition(book.state, new_state):
         book.state = new_state
       else:
-        continue
+        msg = _('Moving from %s to %s is not allowed') % (book.state, new_state)
+        raise UserError(msg)
   
 #   Method to change the book state by calling the change_state method
   def make_available(self):
@@ -163,6 +164,13 @@ class BibliotecaLivro(models.Model):
     
   def make_lost(self):
     self.change_state('lost')
+    
+  def log_all_library_members(self):
+#     This is an empty recordset of model biblioteca.membro
+    biblioteca_membro_model = self.env['biblioteca.membro']
+    all_members = library_member_model.search([])
+    print("ALL MEMBERS: ", all_members)
+    return True
   
   
 class ResPartner(models.Model):
