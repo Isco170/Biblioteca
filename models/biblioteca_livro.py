@@ -19,11 +19,11 @@ class BibliotecaLivro(models.Model):
   _rec_name = 'abreviatura'
   abreviatura = fields.Char('Short Title', required=True)
   notes = fields.Text('Internal Notes')
-  state = fields.Selection(
-  [('draft', 'Not Available'),
-   ('available', 'Available'),
-   ('lost', 'Lost')],
-    'State')
+#   state = fields.Selection(
+#   [('draft', 'Not Available'),
+#    ('available', 'Available'),
+#    ('lost', 'Lost')],
+#     'State')
   description = fields.Html('Description')
   cover = fields.Binary('Book Cover')
   out_of_print = fields.Boolean('Out of Print?')
@@ -80,7 +80,10 @@ class BibliotecaLivro(models.Model):
   
   state = fields.Selection([
     ('draft', 'Unavailable'),
-  ])
+    ('available', 'Available'),
+    ('borrowed', 'Borrowed'),
+    ('lost', 'Lost')],
+    'State', default="draft")
   
   _sql_constraints = [
     ('name_uniq', 'UNIQUE (name)','O titulo do livro deve ser unico.'),
@@ -129,6 +132,26 @@ class BibliotecaLivro(models.Model):
     models = self.env['ir.model'].search([
       ('field_id.name', '=', 'message_ids')])
     return [(x.model, x.name) for x in models]
+  
+#   Helper method to check whether a state transition is allowed
+  @api.model
+  def is_allowed_transition(self, old_state, new_state):
+    allowed = [('draft', 'available'),
+               ('available', 'borrowed'),
+               ('borrowed', 'available'),
+               ('available', 'lost'),
+               ('borrowed', 'lost'),
+               ('lost', 'available')]
+    return (old_state, new_state) in allowed
+  
+#   Method to change the state of some books to new state
+  def change_state(self, new_state):
+    for book in self:
+      if book.is_allowed_transition(book.state, new_state):
+        book.state = new_state
+      else:
+        continue
+  
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
