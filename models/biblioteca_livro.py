@@ -117,6 +117,8 @@ class BibliotecaLivro(models.Model):
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
+  _order = 'name'
+  
   published_book_ids = fields.One2many(
     'biblioteca.livro', 'publisher_id',
     string = 'Published Books')
@@ -127,3 +129,10 @@ class ResPartner(models.Model):
 #     relation = 'biblioteca_book_res_partner_rel'
 #     optional
   )
+  count_books = fields.Integer('Number of authored Books',
+                              compute = '_compute_count_books')
+  
+  @api.depends('authored_books_ids')
+  def _compute_count_books(self):
+    for r in self:
+      r.count_books = len(r.authored_books_ids)
