@@ -172,6 +172,9 @@ class BibliotecaLivro(models.Model):
     print("ALL MEMBERS: ", all_members)
     return True
   
+  def change_release_date(self):
+    self.ensure_one()
+    self.date_release = fields.Date.today()
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
