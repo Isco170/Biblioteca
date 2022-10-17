@@ -14,6 +14,7 @@
     <field name="model">biblioteca.livro.categoria</field>
     <field name="arch" type="xml">
       <form>
+        <button name='create_categories' string='Criar categoria' type='object' />
         <group>
           <group>
             <field name="name" />
