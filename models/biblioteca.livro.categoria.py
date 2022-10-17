@@ -4,8 +4,8 @@ from odoo.exceptions import ValidationError
 class LivroCategoria(models.Model):
   _name = 'biblioteca.livro.categoria'
   _description = 'Biblioteca Livro Categoria'
-  _parent_store = True
-  _parent_name = "parent_id"  # optional if field is 'parent_id'
+#   _parent_store = True
+#   _parent_name = "parent_id"  # optional if field is 'parent_id'
 
   name = fields.Char('Categoria')
   description = fields.Text('Description')
@@ -38,11 +38,10 @@ class LivroCategoria(models.Model):
     
     parent_category_val = {
       'name': 'Parent category',
-      'email': 'Description for parent category'
-      'childs_id': [
+      'description': 'Description for parent category',
+      'child_ids': [
         (0, 0, categ1),
         (0, 0, categ2),
       ]
     }
-    
     record = self.env['biblioteca.livro.categoria'].create(parent_category_val)

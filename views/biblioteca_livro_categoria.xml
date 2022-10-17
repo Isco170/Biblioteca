@@ -14,10 +14,13 @@
     <field name="model">biblioteca.livro.categoria</field>
     <field name="arch" type="xml">
       <form>
-        <button name='create_categories' string='Criar categoria' type='object' />
+        <header>
+          <button name='create_categories' string='Criar categoria' type='object' />
+        </header>
         <group>
           <group>
             <field name="name" />
+            <field name="description" />
           </group>
           <group>
             <field name="parent_id" />
@@ -37,6 +40,7 @@
     <field name="arch" type="xml">
       <tree>
         <field name="name"/>
+        <field name="description" />
       </tree>
     </field>
   </record>
