@@ -186,6 +186,9 @@ class BibliotecaLivro(models.Model):
     ]
     
     books = self.search(domain)
+    
+  @api.model
+  def books_with_multiple_authors(self, all_books):
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
