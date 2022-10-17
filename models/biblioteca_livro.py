@@ -188,7 +188,15 @@ class BibliotecaLivro(models.Model):
     books = self.search(domain)
     
   @api.model
-  def books_with_multiple_authors(self, all_books):
+  def get_author_names(self, books):
+    return books.mapped('author_ids.name')
+#   @api.model
+#   def books_with_multiple_authors(self, all_books):
+  
+#   def predicate(book):
+#     if len(book.author_ids) > 1:
+#       return True
+#     return False
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
