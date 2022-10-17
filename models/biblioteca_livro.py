@@ -177,7 +177,15 @@ class BibliotecaLivro(models.Model):
     self.date_release = fields.Date.today()
     
   def find_book(self):
+    domain = [
+      '|',
+      '&', ('name', 'ilike', 'Book Name'),
+          ('category_id.name', 'ilike', 'Category Name'),
+      '&', ('name', 'ilike', 'Book Name 2'),
+          ('category_id.name', 'ilike', 'Category Name 2')
+    ]
     
+    books = self.search(domain)
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
