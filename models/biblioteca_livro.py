@@ -175,6 +175,9 @@ class BibliotecaLivro(models.Model):
   def change_release_date(self):
     self.ensure_one()
     self.date_release = fields.Date.today()
+    
+  def find_book(self):
+    
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
