@@ -19,6 +19,7 @@ class BibliotecaLivro(models.Model):
   _description = 'Biblioteca Livro'
   _order = 'date_release desc, name'
   _rec_name = 'abreviatura'
+  mnager_remarks = fields.Text('Manager Remarks')
   abreviatura = fields.Char('Short Title', required=True)
   notes = fields.Text('Internal Notes')
 #   state = fields.Selection(
