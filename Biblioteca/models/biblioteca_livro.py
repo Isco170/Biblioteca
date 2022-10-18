@@ -198,6 +198,21 @@ class BibliotecaLivro(models.Model):
 #     if len(book.author_ids) > 1:
 #       return True
 #     return False
+
+#   Extend create()
+  @api.model
+  def create(self, values):
+    if not self.user_has_groups('my_library.acl_book_librarian'):
+       if 'manager_remarks' in values:
+         raise UserError('You are not allowed to modify ' 'manager_remarks')
+    return super(BibliotecaLivro, self).create(values)
+    
+  @api.model
+  def write(self, values):
+     if not sel.user_has_groups('my_library.acl_book_librarian'):
+      if 'manager_remarks' in values:
+        raise UserError('You are not allowed to modify ' 'manager_remarks')
+    return super(BibliotecaLivro, self).write(values)  
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
