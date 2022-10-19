@@ -38,15 +38,9 @@ class BibliotecaLivro(models.Model):
     store = False, # optional
     compute_sudo = True # optional
   )
-  reader_rating = fields.Float(
-    'Reader Avarege Rating', 
-    digits = (14, 4),
-  )
-  cost_price = fields.Float(
-    'Livro Custo', digits = 'Livro Preco'
-  )
-  currency_id = fields.Many2one(
-    'res.currency', string='Currency')
+  reader_rating = fields.Float('Reader Avarege Rating', digits = (14, 4),)
+  cost_price = fields.Float('Livro Custo', digits = 'Livro Preco')
+  currency_id = fields.Many2one('res.currency', string='Currency')
   
   retail_price = fields.Monetary(
     'Retail Price',
@@ -205,7 +199,15 @@ class BibliotecaLivro(models.Model):
     if not sel.user_has_groups('my_library.acl_book_librarian'):
       if 'manager_remarks' in values:
         raise UserError('You are not allowed to modify ' 'manager_remarks')
-    return super(BibliotecaLivro, self).write(values)  
+    return super(BibliotecaLivro, self).write(values)
+  
+  def name_get(self):
+    result = []
+    for book in self:
+      authors = book.author_ids.mapped('name')
+      name = '%s (%s)' % (book.name, ', '.join(authors))
+      result.append((book.id, name))
+      return result
   
 class ResPartner(models.Model):
   _inherit = 'res.partner'
