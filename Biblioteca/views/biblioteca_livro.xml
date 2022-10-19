@@ -30,6 +30,7 @@
             <group>
               <field name="name" />
               <field name="author_ids" widget="many2many_tags" />
+              <field name="old_edition"/>
               <field name="state"/>
               <field name="pages"/>
               <field name="notes"/>
@@ -37,6 +38,7 @@
             <group>
               <field name="abreviatura" />
               <field name="date_release" />
+              <field name="isbn" />
               <field name="manager_remarks" />
               <field name="date_updated" />
               <field name="cover" widget="image" class="oe_avatar" />

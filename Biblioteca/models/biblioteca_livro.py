@@ -27,6 +27,7 @@ class BibliotecaLivro(models.Model):
   out_of_print = fields.Boolean('Out of Print?')
   name = fields.Char('Title', required=True)
   isbn = fields.Char('ISBN')
+  old_edition = fields.Many2one('biblioteca.livro', string = 'Velha Edicao')
   date_release = fields.Date('Release Date')
   date_updated = fields.Datetime('Last Updated')
   pages = fields.Integer('Number of Pages')
@@ -210,7 +211,15 @@ class BibliotecaLivro(models.Model):
       return result
   
   def _name_search(self, name='', args =None, operator='ilike', limit = 100, name_get_uid=None):
-  
+    args = [] if args is None else args.copy()
+    if not(name == '' and operator == 'ilike'):
+      args += ['|', '|',
+               ('name', operator, name),
+               ('isbn', operator, name),
+               ('author_ids.name', operator, name)
+              ]
+      return super(BibliotecaLivro, self)._name_search(
+        name = name, args = args, operator = operator, limit = limit, name_get_uid = name_get_uid)
 class ResPartner(models.Model):
   _inherit = 'res.partner'
   _order = 'name'
