@@ -1,0 +1,6 @@
+<record id="livro_cookbook" model="biblioteca.livro">
+  <field name="name">Odoo 14 Development</field>
+</record>
+<record id="base.main_company" model="res.company">
+  <field name="name">Packt publishing</field>
+</record>
