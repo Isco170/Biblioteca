@@ -19,18 +19,14 @@ class BibliotecaLivro(models.Model):
   _description = 'Biblioteca Livro'
   _order = 'date_release desc, name'
   _rec_name = 'abreviatura'
-  mnager_remarks = fields.Text('Manager Remarks')
+  manager_remarks = fields.Text('Manager Remarks')
   abreviatura = fields.Char('Short Title', required=True)
   notes = fields.Text('Internal Notes')
-#   state = fields.Selection(
-#   [('draft', 'Not Available'),
-#    ('available', 'Available'),
-#    ('lost', 'Lost')],
-#     'State')
   description = fields.Html('Description')
   cover = fields.Binary('Book Cover')
   out_of_print = fields.Boolean('Out of Print?')
   name = fields.Char('Title', required=True)
+  isbn = fields.Char('ISBN')
   date_release = fields.Date('Release Date')
   date_updated = fields.Datetime('Last Updated')
   pages = fields.Integer('Number of Pages')
@@ -56,10 +52,7 @@ class BibliotecaLivro(models.Model):
     'Retail Price',
 #     optional: currency_field = 'currency_id',
   )
-  author_ids = fields.Many2many(
-    'res.partner',
-    string = 'Authors'
-  )
+  author_ids = fields.Many2many('res.partner', string = 'Authors')
   
   publisher_id = fields.Many2one(
     'res.partner', string = 'Publisher',
@@ -209,7 +202,7 @@ class BibliotecaLivro(models.Model):
     
   @api.model
   def write(self, values):
-     if not sel.user_has_groups('my_library.acl_book_librarian'):
+    if not sel.user_has_groups('my_library.acl_book_librarian'):
       if 'manager_remarks' in values:
         raise UserError('You are not allowed to modify ' 'manager_remarks')
     return super(BibliotecaLivro, self).write(values)  
