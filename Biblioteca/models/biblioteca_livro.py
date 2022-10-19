@@ -209,6 +209,8 @@ class BibliotecaLivro(models.Model):
       result.append((book.id, name))
       return result
   
+  def _name_search(self, name='', args =None, operator='ilike', limit = 100, name_get_uid=None):
+  
 class ResPartner(models.Model):
   _inherit = 'res.partner'
   _order = 'name'
