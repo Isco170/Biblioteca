@@ -27,7 +27,7 @@ class BibliotecaLivro(models.Model):
   out_of_print = fields.Boolean('Out of Print?')
   name = fields.Char('Title', required=True)
   isbn = fields.Char('ISBN')
-  old_edition = fields.Many2one('biblioteca.livro', string = 'Velha Edicao')
+  old_edition = fields.Many2one('biblioteca.livro', string = 'Velha Edição')
   date_release = fields.Date('Release Date')
   date_updated = fields.Datetime('Last Updated')
   pages = fields.Integer('Number of Pages')
@@ -220,6 +220,16 @@ class BibliotecaLivro(models.Model):
               ]
       return super(BibliotecaLivro, self)._name_search(
         name = name, args = args, operator = operator, limit = limit, name_get_uid = name_get_uid)
+    
+  @api.model
+  def _get_average_cost(self):
+    grouped_result = self.read_group(
+      [('cost_price', "!=", False)], # Domain
+      ['categoria_id', 'cost_price:avg'], # Fields to access
+      ['categoria_id'] # group_by
+    )
+    return grouped_result
+    
 class ResPartner(models.Model):
   _inherit = 'res.partner'
   _order = 'name'
