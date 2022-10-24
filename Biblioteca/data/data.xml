@@ -1,6 +1,22 @@
-<record id="livro_cookbook" model="biblioteca.livro">
-  <field name="name">Odoo 14 Development</field>
-</record>
-<record id="base.main_company" model="res.company">
-  <field name="name">Packt publishing</field>
-</record>
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+  <record id="base.main_company" model="res.company">
+    <field name="name">Packt publishing</field>
+  </record>
+  
+  <record id="res_partner_packt" model="res.partner">
+    <field name="name">Packt Publishing</field>
+    <field name="city">Birmingham</field>
+    <field name="country_id" ref="base.uk" />
+  </record>
+  
+  <record id="livro_category_all" model="biblioteca.livro.categoria" forcecreate="false">
+    <field name="name">All books</field>
+  </record>
+  
+  <record id="livro_cookbook" model="biblioteca.livro">
+    <field name="name">Odoo 14 Development</field>
+    <field name="abreviatura">Odoo 14 Development</field>
+    <field name="pages">120</field>
+  </record>  
+</odoo>

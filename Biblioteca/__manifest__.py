@@ -12,7 +12,9 @@
     'security/ir.model.access.csv',
     'data/data.xml',
     'views/biblioteca_livro.xml',
-    'views/biblioteca.livro.categoria.xml'
+    'views/biblioteca_livro_categoria.xml'
   ],
-#   'demo': ['demo.xml'],
+  'demo': [
+    'data/demo.xml',
+  ],
 }
