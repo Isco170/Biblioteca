@@ -1,8 +1,9 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 acl_livro,biblioteca.livro_default,model_biblioteca_livro,,1,0,0,0
-acl_biblioteca_user, biblioteca.livro_default, model_biblioteca_livro,base.group_user,1,1,0,0
+acl_livro_user,biblioteca.livro_default,model_biblioteca_livro,base.group_user,1,1,0,0
 acl_livro_librarian,biblioteca.livro_librarian,model_biblioteca_livro,group_librarian,1,1,1,1
 acl_livro_categoria,biblioteca.livro.categoria_default,model_biblioteca_livro_categoria,,1,0,0,0
 acl_livro_categoria_librarian,biblioteca.livro.categoria_librarian,model_biblioteca_livro_categoria,group_librarian,1,1,1,1
 acl_biblioteca_membro,biblioteca.membro_default,model_biblioteca_membro,,1,0,0,0
 acl_biblioteca_membro_librarian,biblioteca.membro_librarian,model_biblioteca_membro,group_librarian,1,1,1,1
+acl_biblioteca_livro_user,ACL for books,model_biblioteca_livro,base.group_user,1,0,0,0
