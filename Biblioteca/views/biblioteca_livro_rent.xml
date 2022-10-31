@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="biblioteca_livro_rent_action" model="ir.action.act_window">
+    <field name="name">Book on rent</field>
+    <field name="res_model">biblioteca_livro_rent</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  
+  <menuitem name="Book on rent" id="biblioteca_livro_rent_menu" parent="biblioteca_base_menu" action="biblioteca_livro_rent_action"/>
+  
+  <record id="biblioteca_livro_rent_view_form" model="ir.ui.view">
+    <field name="name">Biblioteca Rent Form</field>
+    <field name="model">biblioteca.livro.rent</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button name="book_return" string="Return the Book" states="ongoing" type="object"/>
+          <field name="state" widget="statusbar"/>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="book_id" domain="[('state', '=', 'available')]"/>
+              <field name="borrower_id"/>
+            </group>
+            <group>
+              <field name="rent_date"/>
+              <field name="return_date"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>
