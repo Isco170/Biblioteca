@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id='tarefa_rota_action' model='ir.actions.act_window'>
+    <field name="name">Tarefa, Rotas</field>
+    <field name="res_model">tarefa.rota</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  
+  <menuitem name="Minhas Rotas" id="tarefa_base_menu" />
+  <menuitem name="Tarefas" id="projeto_tarefa_menu" parent="tarefa_base_menu" action="tarefa_rota_action"/>
+<!--   <menuitem name="Projetos" id="rota_projeto_menu" parent="rota_base_menu" action="rota_projeto_action"/> -->
+  
+  <record id="projeto_tarefa_view_form" model="ir.ui.view">
+    <field name="name">Tarefa Rotas Form</field>
+    <field name="model">tarefa.rota</field>
+    <field name="arch" type="xml">
+      <form>
+        <group>
+          <group>
+            <field name="name"/>
+            <field name="dateField" />
+            <field name="vendedor"/>
+          </group>
+          <group>
+            <field name="projeto_ids"/>
+            <field name="cliente_id"/>
+          </group>
+        </group>
+      </form>
+    </field>
+  </record>
+  
+    <record id="projeto_tarefa_view_tree" model="ir.ui.view">
+    <field name="name">Tarefa Rota Lista</field>
+    <field name="model">tarefa.rota</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="cliente_id"/>
+        <field name="vendedor"/>
+      </tree>
+    </field>
+  </record>
+  
+</odoo>
