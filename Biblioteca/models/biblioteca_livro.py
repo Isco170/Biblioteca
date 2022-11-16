@@ -98,6 +98,14 @@ class BibliotecaLivro(models.Model):
     today = fields.Date.today()
     value_days = timedelta(days=value)
     value_date = today - value_days
+  
+  @api.model
+  def _update_livro_preco(self):
+    listaLivros = self.search([])
+    for livro in listaLivros:
+      livro.cost_price += 10
+    
+    
 #     Convert the operator:
 # book with age > value have a date <value_date
     operator_map = {
