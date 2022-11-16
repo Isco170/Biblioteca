@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-  <record id="base.main_company" model="res.company">
+<!--   <record id="base.main_company" model="res.company">
     <field name="name">Packt publishing</field>
-  </record>
+  </record> -->
   
   <record id="res_partner_packt" model="res.partner">
     <field name="name">Packt Publishing</field>
@@ -18,5 +18,7 @@
     <field name="name">Odoo 14 Development</field>
     <field name="abreviatura">Odoo 14 Development</field>
     <field name="pages">120</field>
-  </record>  
+  </record>
+  
+  <function model="biblioteca.livro" name="_update_livro_preco" />
 </odoo>
