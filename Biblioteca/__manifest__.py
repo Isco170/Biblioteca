@@ -7,6 +7,8 @@
   'category': "Tools",
   'version': '14.0.1',
   'depends': ['base'],
+  'application': True,
+  'sequence': 1,
   'data': [
     'security/groups.xml',
     'security/ir.model.access.csv',
