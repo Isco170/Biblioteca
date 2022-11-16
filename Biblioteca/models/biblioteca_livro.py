@@ -161,6 +161,16 @@ class BibliotecaLivro(models.Model):
     
   def make_lost(self):
     self.change_state('lost')
+  
+  def book_rent(self):
+    self.ensure_one()
+    if self.state != 'available':
+      raise UserError(_('Livro não está disponível para aluguer'))
+    rent_as_superuser = self.env['biblioteca.livro.rent'].sudo()
+    rent_as_superuser.create({
+      'book_id': self.id,
+      'borrower_id': self.env.user.partner_id.id,
+    })
     
   def log_all_library_members(self):
 #     This is an empty recordset of model biblioteca.membro
